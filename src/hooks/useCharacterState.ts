@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import type { Character } from '../types/Character';
+import { jobList } from '../data/jobs';
 
 const STORAGE_KEY = 'lifeSimCharacter';
 
@@ -11,6 +12,9 @@ const defaultCharacter: Character = {
     happiness: 50,
     money: 100,
   },
+  job: undefined,
+  experience: 0,
+  educationLevel: 0,
 };
 
 export const useCharacterState = () => {
@@ -45,11 +49,27 @@ export const useCharacterState = () => {
     setCharacter(defaultCharacter);
   };
 
+  const applyForJob = (jobId: string) => {
+  const job = jobList.find(j => j.id === jobId);
+  if (!job) return;
+
+  // Check requirements
+  const meetsEducation = (character.educationLevel ?? 0) >= (job.requiredEducationLevel ?? 0);
+  const meetsExperience = (character.experience ?? 0) >= (job.requiredExperience ?? 0);
+
+  if (meetsEducation && meetsExperience) {
+    setCharacter(prev => ({ ...prev, job }));
+  } else {
+    alert('You do not meet the requirements for this job.');
+  }
+};
+
   return {
     character,
     increaseAge,
     changeStat,
     isAlive,
     resetCharacter,
+    applyForJob
   };
 };

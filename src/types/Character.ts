@@ -1,3 +1,6 @@
+import type { Job } from './Job';
+
+
 export interface CharacterStats {
   health: number;
   happiness: number;
@@ -8,4 +11,7 @@ export interface Character {
   name: string;
   age: number;
   stats: CharacterStats;
+  job?: Job; // optional if unemployed
+  experience?: number;
+  educationLevel?: number;
 }
