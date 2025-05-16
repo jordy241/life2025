@@ -1,5 +1,6 @@
 import { jobList } from '../data/jobs';
 import type { Character } from '../types/Character';
+import type { Job } from '../types/Job';
 
 interface Props {
   character: Character;
@@ -7,6 +8,16 @@ interface Props {
 }
 
 export const WorkTab = ({ character, applyForJob }: Props) => {
+
+  const isAvailable = (job: Job) => {
+    const locIdOk = job.availableIn?.locationIds?.includes(character.currentLocation.id);
+    const typeOk = job.availableIn?.locationTypes?.includes(character.currentLocation.type);
+    return locIdOk || typeOk || !job.availableIn;
+  };
+  
+  const availableJobs = jobList.filter(isAvailable);
+
+  
   return (
     <>
       <h2>Available Jobs</h2>
@@ -17,7 +28,7 @@ export const WorkTab = ({ character, applyForJob }: Props) => {
             gap: '1rem',
         }}
         >
-        {jobList.map(job => (
+        {availableJobs.map(job => (
             <div
             key={job.id}
             style={{
@@ -27,7 +38,7 @@ export const WorkTab = ({ character, applyForJob }: Props) => {
                 background: '#464646FF',
             }}
             >
-            <h3>{job.name} (${job.salary}/month)</h3>
+            <h3>{job.name} (${job.baseSalary}/month)</h3>
             <p>{job.description}</p>
             <button onClick={() => applyForJob(job.id)}>Apply</button>
             </div>
@@ -38,7 +49,7 @@ export const WorkTab = ({ character, applyForJob }: Props) => {
       {character.job && (
         <div style={{ marginTop: '2rem' }}>
           <h3>✅ Current Job: {character.job.name}</h3>
-          <p>💵 Salary: ${character.job.salary}/day</p>
+          <p>💵 Salary: ${character.job.baseSalary}/day</p>
         </div>
       )}
     </>

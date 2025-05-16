@@ -1,11 +1,18 @@
+import type { LocationType } from "./Location";
+
 export interface Job {
   id: string;
   name: string;
-  salary: number; // per day or per tick
-  requiredEducationLevel?: number; // e.g., 0 = none, 1 = high school, 2 = college
-  requiredExperience?: number; // years or points
-  stressLevel?: number; // 1–10
-  prestige?: number; // 1–100
+  baseSalary: number;
+  requiredEducationLevel?: number;
+  requiredExperience?: number;
+  stressLevel?: number;
+  prestige?: number;
   hoursPerDay?: number;
   description?: string;
+
+  availableIn?: {
+    locationIds?: string[];         // Specific cities/towns/villages
+    locationTypes?: LocationType[]; // Or by type: 'city', 'town', 'village'
+  };
 }

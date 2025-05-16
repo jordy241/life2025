@@ -1,4 +1,6 @@
 import type { Job } from './Job';
+import type { Item } from './Item'
+import type { Location } from './Location';
 
 
 export interface CharacterStats {
@@ -14,4 +16,6 @@ export interface Character {
   job?: Job; // optional if unemployed
   experience?: number;
   educationLevel?: number;
+  inventory: Item[];
+  currentLocation: Location;
 }
