@@ -9,6 +9,7 @@ import type { JobEvent } from './types/JobEvent';
 import { JobEventDialog } from './components/JobEventDialog';
 import { LocationTab } from './components/LocationTab';
 import { locations } from './data/locations';
+import { Header } from './components/Header';
 
 
 
@@ -55,7 +56,8 @@ function App() {
   
 
   return (
-    <div style={{ padding: '2rem', fontFamily: 'sans-serif' }}>
+    <>
+      <Header character={character} /><div style={{ padding: '2rem', fontFamily: 'sans-serif' }}>
       <h1>🧬 Life Simulator</h1>
 
       <div style={{ display: 'flex', gap: '1rem', marginBottom: '1rem' }}>
@@ -75,8 +77,7 @@ function App() {
             character={character}
             nextMonth={nextMonth}
             isAlive={isAlive}
-            resetCharacter={resetCharacter}
-          />
+            resetCharacter={resetCharacter} />
         )}
 
         {activeTab === 'work' && (
@@ -88,13 +89,13 @@ function App() {
           <LocationTab
             currentLocation={character.currentLocation}
             allLocations={locations}
-            travelTo={travelTo}
-          />
+            travelTo={travelTo} />
         )}
 
       </div>
 
-    </div>
+      </div>
+    </>
   );
 }
 

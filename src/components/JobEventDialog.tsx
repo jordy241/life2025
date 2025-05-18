@@ -28,7 +28,7 @@ export const JobEventDialog = ({ event, onSelect }: Props) => {
     >
       <div
         style={{
-          background: '#fff',
+          background: '#727272FF',
           padding: '2rem',
           borderRadius: '12px',
           maxWidth: '500px',
