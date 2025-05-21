@@ -1,11 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* light mode */
+  html {
+    @apply bg-white text-gray-900;
+  }
+  /* dark mode */
+  html.dark {
+    @apply bg-gray-900 text-gray-100;
+  }
+}
+
 :root {
   font-family: system-ui, Lato, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
