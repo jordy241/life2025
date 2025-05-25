@@ -1,31 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import CharacterProfile from './components/CharacterProfile';
-import { useCharacter } from './hooks/useCharacter';
 import ThemeToggle from './components/ThemeToggle';
 
 const App: React.FC = () => {
-  const character = useCharacter('1');
-  const [darkMode, setDarkMode] = useState(() =>
-    // initialize from existing class or system preference
-    typeof window !== 'undefined' &&
-    document.documentElement.classList.contains('dark')
-  );
+  const [darkMode, setDarkMode] = useState(true);
 
+
+  // whenever darkMode flips, add/remove the "dark" class on <html>
   useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
+    document.documentElement.classList.toggle('dark', darkMode);
   }, [darkMode]);
 
   return (
-    <div className="min-h-screen bg-white text-gray-900 dark:bg-gray-900 dark:text-black">
-      <header className="p-4 flex justify-end">
+    <div className="min-h-screen bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-100">
+      {/* ← overall container now switches bg + text via dark: variants */}
+
+      {/* fixed top-right toggle */}
+      <div className="fixed top-4 right-4 z-50">
         <ThemeToggle enabled={darkMode} setEnabled={setDarkMode} />
-      </header>
-      <main className="p-6">
-        <CharacterProfile character={character} />
+      </div>
+
+      {/* your main content below */}
+      <main className="flex items-center justify-center min-h-screen">
       </main>
     </div>
   );

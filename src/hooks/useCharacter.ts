@@ -1,12 +1,20 @@
 import { useState } from 'react';
 import type { Character } from '../types/Character';
-import { initialCharacters } from '../data/seedCharacters';
+import type { Location } from '../types/Location';
+import initialCharacters from '../data/characters';
 
-export const useCharacter = (id: string): Character => {
-  const [character] = useState<Character>(() => {
-    const found = initialCharacters.find((c) => c.id === id);
-    if (!found) throw new Error(`Character with id ${id} not found`);
-    return found;
-  });
-  return character;
-};
+export function useCharacters() {
+  const [characters, setCharacters] = useState<Character[]>(initialCharacters);
+
+  function addCharacter(newChar: Character) {
+    setCharacters((all) => [...all, newChar]);
+  }
+
+  function updateCharacterLocation(id: string, location: Location) {
+    setCharacters((all) =>
+      all.map((c) => (c.id === id ? { ...c, currentLocation: location } : c))
+    );
+  }
+
+  return { characters, addCharacter, updateCharacterLocation };
+}

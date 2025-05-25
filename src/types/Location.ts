@@ -1,6 +1,15 @@
+export interface City {
+  name: string;
+  wageMultiplier: number;
+  costMultiplier: number;
+}
+
+export interface Country {
+  name: string;
+  cities: City[];
+}
+
 export interface Location {
-    id: string;
-    name: string;
-    description?: string;
-    coordinates: { x: number; y: number };
-  }
+  country: string;
+  city: string;
+}
