@@ -1,5 +1,3 @@
-import React from 'react';
-
 interface StatsSectionProps<T extends object> {
   title: string;
   stats: Record<keyof T, number>;

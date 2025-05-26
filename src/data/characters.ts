@@ -4,26 +4,18 @@ import { v4 as uuid } from 'uuid';
 const initialCharacters: Character[] = [
   {
     id: uuid(),
-    name: 'Alice',
+    first_name: 'Alice',
+    last_name: 'Smith',
     age: 0,
-    stats: { health: 100, happiness: 50, money: 0 },
-    job: undefined,
-    experience: 0,
-    educationLevel: 0,
-    inventory: [],
-    currentLocation: { country: '', city: '' },
+    money: { cash: 0, bank: 0, debt: 0 },
     isActive: false
   },
   {
     id: uuid(),
-    name: 'Bob',
+    first_name: 'Bob',
+    last_name: 'Johnson',
     age: 0,
-    stats: { health: 90, happiness: 60, money: 0 },
-    job: undefined,
-    experience: 0,
-    educationLevel: 0,
-    inventory: [],
-    currentLocation: { country: '', city: '' },
+    money: { cash: 0, bank: 0, debt: 0 },
     isActive: true
   },
 ];
