@@ -1,7 +1,7 @@
-// src/hooks/useCharacters.ts
 
 import { useState } from 'react'
 import type { Character } from '../types/Character'
+import type { Location } from '../types/Location'
 import initialCharacters from '../data/characters'
 
 export function useCharacters() {
@@ -13,24 +13,26 @@ export function useCharacters() {
     )
   }
 
-  function updateCharacterMoney(id: string, moneyChanges: Partial<Character['money']>) {
+  function updateCharacterMoney(id: string, money: Partial<Character['money']>) {
     setCharacters(all =>
-      all.map(c => c.id === id
-        ? { ...c, money: { ...c.money, ...moneyChanges } }
-        : c
+      all.map(c =>
+        c.id === id ? { ...c, money: { ...c.money, ...money } } : c
       )
     )
   }
 
-  const addCharacter = (newChar: Character) => {
-    setCharacters(all => [...all, newChar])
+  function ageUpCharacter(id: string) {
+    setCharacters(all =>
+      all.map(c =>
+        c.id === id ? { ...c, age: c.age + 1 } : c
+      )
+    )
   }
 
-  const ageUpCharacter = (id: string) => {
+  function updateCharacterLocation(id: string, location: Location) {
     setCharacters(all =>
-      all.map(c => c.id === id
-        ? { ...c, age: c.age + 1 }
-        : c
+      all.map(c =>
+        c.id === id ? { ...c, currentLocation: location } : c
       )
     )
   }
@@ -41,8 +43,8 @@ export function useCharacters() {
     characters,
     activeCharacter,
     setActiveCharacter,
-    addCharacter,
     updateCharacterMoney,
-    ageUpCharacter
+    updateCharacterLocation,
+    ageUpCharacter,
   }
 }

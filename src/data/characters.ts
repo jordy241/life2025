@@ -8,7 +8,22 @@ const initialCharacters: Character[] = [
     last_name: 'Smith',
     age: 0,
     money: { cash: 0, bank: 0, debt: 0 },
-    isActive: false
+    isActive: false,
+    currentLocation: {
+      country: 'Belgium',
+      regionName: 'Brussels',
+      regionType: 'city'
+    },
+    avatarConfig: {
+      avatarStyle: 'Circle',
+      topType: 'ShortHairShortFlat',
+      accessoriesType: 'Blank',
+      clotheType: 'BlazerSweater',
+      eyeType: 'Default',
+      eyebrowType: 'Default',
+      mouthType: 'Smile',
+      skinColor: 'Light'
+    }
   },
   {
     id: uuid(),
@@ -16,7 +31,22 @@ const initialCharacters: Character[] = [
     last_name: 'Johnson',
     age: 0,
     money: { cash: 0, bank: 0, debt: 0 },
-    isActive: true
+    isActive: true,
+    currentLocation: {
+      country: 'Belgium',
+      regionName: 'Brussels',
+      regionType: 'city'
+    },
+    avatarConfig: {
+      avatarStyle: 'Circle',
+      topType: 'ShortHairShortFlat',
+      accessoriesType: 'Blank',
+      clotheType: 'BlazerSweater',
+      eyeType: 'Default',
+      eyebrowType: 'Default',
+      mouthType: 'Smile',
+      skinColor: 'Light'
+    }
   },
 ];
 

@@ -4,11 +4,15 @@ import React, { useEffect, useState } from 'react'
 import { useCharacters } from './hooks/useCharacter'
 import ThemeToggle from './components/ThemeToggle'
 import ATMDialog from './components/bank/ATMDialog'
+import CharacterAvatar from './components/character/CharacterAvatar'
+import initialCountries from './data/locations'
+import LocationDialog from './components/location/LocationDialog'
 
 const App: React.FC = () => {
   const {
     activeCharacter,
     updateCharacterMoney,
+    updateCharacterLocation,
     setActiveCharacter,
     ageUpCharacter,
     characters,
@@ -16,6 +20,7 @@ const App: React.FC = () => {
 
   const [darkMode, setDarkMode] = useState(true)
   const [atmOpen, setAtmOpen] = useState(false)
+  const [locationDialogOpen, setLocationDialogOpen] = useState(false)
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', darkMode)
@@ -69,6 +74,20 @@ const App: React.FC = () => {
             <p className="text-sm text-gray-500 dark:text-gray-400">
               Cash: ${activeCharacter.money.cash} | Bank: ${activeCharacter.money.bank} | Debt: ${activeCharacter.money.debt}
             </p>
+            <CharacterAvatar config={activeCharacter.avatarConfig} />
+            <div className="mt-4 flex items-center justify-center space-x-2">
+              <p className="text-sm text-gray-700 dark:text-gray-300">
+                📍 Lives in {activeCharacter.currentLocation.regionName}, {activeCharacter.currentLocation.country}
+              </p>
+              <button
+                onClick={() => setLocationDialogOpen(true)}
+                className="text-blue-500 hover:text-blue-700 text-sm"
+                title="Edit location"
+              >
+                ✏️
+              </button>
+            </div>
+
           </div>
         ) : (
           <p className="text-gray-500 dark:text-gray-400">
@@ -88,6 +107,20 @@ const App: React.FC = () => {
           }
         />
       )}
+
+      {activeCharacter && (
+        <LocationDialog
+          isOpen={locationDialogOpen}
+          onClose={() => setLocationDialogOpen(false)}
+          countries={initialCountries}
+          initialLocation={activeCharacter.currentLocation}
+          onConfirm={(newLoc) => {
+            updateCharacterLocation(activeCharacter.id, newLoc)
+            setLocationDialogOpen(false)
+          }}
+        />
+      )}
+
 
     </div>
   )
