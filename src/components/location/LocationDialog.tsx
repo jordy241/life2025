@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import type { Country, RegionType, Location } from '../../types/Location'
+import type { Country, Location } from '../../types/Location'
 
 interface Props {
   isOpen: boolean

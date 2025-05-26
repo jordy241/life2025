@@ -13,9 +13,7 @@ const App: React.FC = () => {
     activeCharacter,
     updateCharacterMoney,
     updateCharacterLocation,
-    setActiveCharacter,
     ageUpCharacter,
-    characters,
   } = useCharacters()
 
   const [darkMode, setDarkMode] = useState(true)
@@ -65,10 +63,11 @@ const App: React.FC = () => {
         <ThemeToggle enabled={darkMode} setEnabled={setDarkMode} />
       </div>
 
-      <main className="flex items-center justify-center min-h-screen flex-col space-y-4">
+      <main className="flex items-center justify-center min-h-screen w-screen">
+       <div className="flex flex-col items-center text-center space-y-4">
         {activeCharacter ? (
-          <div className="text-center">
-            <p className="text-xl font-semibold mb-2">
+          <>
+            <p className="text-xl p-4 font-semibold mb-2">
               {activeCharacter.first_name} {activeCharacter.last_name}, Age {activeCharacter.age}
             </p>
             <p className="text-sm text-gray-500 dark:text-gray-400">
@@ -87,13 +86,14 @@ const App: React.FC = () => {
                 ✏️
               </button>
             </div>
-
-          </div>
+          </>
         ) : (
           <p className="text-gray-500 dark:text-gray-400">
             Select a character first
           </p>
         )}
+      </div>
+
       </main>
 
 
